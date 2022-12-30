@@ -1,11 +1,7 @@
 import { ReactNode } from "react";
 import style from "./Button.module.scss";
 
-type ButtonProps = {
-  children: ReactNode;
-};
-
-function Button({ children }: ButtonProps) {
+function Button({ children }: { children: ReactNode }) {
   return <button className={style.button}>{children}</button>;
 }
 
