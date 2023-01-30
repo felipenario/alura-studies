@@ -10,13 +10,18 @@ export interface ITask {
   completed: boolean;
 }
 
-function List({ tasks }: { tasks: ITask[] }) {
+interface IListProps {
+  tasks: ITask[];
+  selectTask: (selectedTask: ITask) => void;
+}
+
+function List({ tasks, selectTask }: IListProps) {
   return (
     <aside className={style.taskList}>
       <h2>Estudos do dia</h2>
       <ul>
-        {tasks.map((item, index) => (
-          <ListItem key={index} task={item.task} time={item.time} />
+        {tasks.map((item) => (
+          <ListItem key={item.id} task={item} selectTask={selectTask} />
         ))}
       </ul>
     </aside>

@@ -1,11 +1,16 @@
 import { ITask } from "../List";
 import style from "../List.module.scss";
 
-function ListItem({ id, task, time, selected, completed }: ITask) {
+interface IListItemProps {
+  task: ITask;
+  selectTask: (selectedTask: ITask) => void;
+}
+
+function ListItem({ task, selectTask }: IListItemProps) {
   return (
-    <li className={style.item}>
-      <h3>{task}</h3>
-      <span>{time}</span>
+    <li className={style.item} onClick={() => selectTask(task)}>
+      <h3>{task.task}</h3>
+      <span>{task.time}</span>
     </li>
   );
 }
