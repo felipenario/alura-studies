@@ -11,12 +11,36 @@ function App() {
 
   function selectTask(selectedTask: ITask) {
     setSelected(selectedTask);
+    setTasks((oldTasks) =>
+      oldTasks.map((task) => ({
+        ...task,
+        selected: task.id === selectedTask.id,
+      }))
+    );
+  }
+
+  function completeTask() {
+    if (selected) {
+      setSelected(undefined);
+      setTasks((oldTasks) =>
+        oldTasks.map((task) => {
+          if (task.id === selected.id) {
+            return {
+              ...task,
+              selected: false,
+              completed: true,
+            };
+          }
+          return task;
+        })
+      );
+    }
   }
 
   return (
     <div className={style.AppStyle}>
       <Form setTasks={setTasks} />
-      <Stopwatch />
+      <Stopwatch selectedTask={selected} completeTask={completeTask} />
       <List tasks={tasks} selectTask={selectTask} />
     </div>
   );
